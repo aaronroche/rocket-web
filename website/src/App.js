@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
+import { getAllItems } from './utils/crud.js'
 import logo from './rocketweb.svg';
 /*import { getDataFromDynamoDB } from './dynamoDBService';*/
 
-const data = [
-  { id: '1', title: 'Rocket 1', payload: 'Word 1', company: 'Space X', details: 'today' },
-  { id: '2', title: 'Rocket 2', payload: 'Word 2', company: 'NASA', details: 'tomorrow' },
-  { id: '3', title: 'Rocket 3', payload: 'Word 3', company: 'Space X', details: 'tonight' }
-];
+// const data = [
+//   { id: '1', title: 'Rocket 1', payload: 'Word 1', company: 'Space X', details: 'today' },
+//   { id: '2', title: 'Rocket 2', payload: 'Word 2', company: 'NASA', details: 'tomorrow' },
+//   { id: '3', title: 'Rocket 3', payload: 'Word 3', company: 'Space X', details: 'tonight' }
+// ];
 
-function App() {/*
+function App() {
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
     async function fetchData() {
       try {
-        const items = await getDataFromDynamoDB();
-        setData(items);
+        const response = await getAllItems('rocket-web');
+
+        setData(response.Items);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -24,7 +27,7 @@ function App() {/*
 
     fetchData();
   }, []);
-*/
+
   return (
     <div className="App">
       <nav className="navbar">
@@ -35,7 +38,7 @@ function App() {/*
       </nav>
       <div className="list-container">
         {data.map(item => (
-          <div key={item.id} className="list-item">
+          <div key={item.uid} className="list-item">
             <h2>{item.title}</h2>
             <p><strong>Payload:</strong> {item.payload}</p>
             <p><strong>Company:</strong> {item.company}</p>
