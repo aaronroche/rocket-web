@@ -13,8 +13,8 @@ export NVM_DIR="$HOME/.nvm"
 nvm install 16.0.0
 
 # Clone the repository and build the project
-git clone https://github.com/tina35917/rocketweb.git
-cd rocketweb
+git clone https://github.com/aaronroche/rocket-web.git --branch website-db      # load specific branch
+cd rocket-web/website
 npm install
 npm run build
 
