@@ -74,6 +74,6 @@ Now, run these commands to allow your computer to run these bash scripts.
 `chmod +x event_bridge.sh`
 `chmod +x deploy_and_run`
 
-Run the project using the command and bash scripts using `./deploy_and_run.sh` in your terminal.
+Run the project using `./deploy_and_run.sh` in your terminal.
 
 That's everything. Enjoy!
