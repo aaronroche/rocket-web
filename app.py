@@ -8,7 +8,7 @@ from lambda_dynamo_stack.LambdaDynamoStack import LambdaDynamoStack
 
 app = cdk.App()
 
-LambdaDynamoStack(app, "rc-db")
-EC2Stack(app, "rc-ec2")
+LambdaDynamoStack(app, "Rocket-Web-Lambda-DB-Stack")
+EC2Stack(app, "Rocket-Web-EC2-Stack")
 
 app.synth()

@@ -1,9 +1,9 @@
 from constructs import Construct
 from aws_cdk import (
-    Stack,
     aws_iam as iam,
     aws_lambda as lambda_,
     aws_dynamodb as dynamodb,
+    Stack,
     RemovalPolicy,
     Duration
 )
@@ -34,17 +34,9 @@ class LambdaDynamoStack(Stack):
                                            runtime=lambda_.Runtime.PYTHON_3_12,
                                            handler="lambda_function.lambda_handler",
                                            timeout=Duration.minutes(1),
-                                           code=lambda_.Code.from_asset("lambda_test.zip"))
-
+                                           code=lambda_.Code.from_asset("lambda.zip"))
         # IAM Permissions
         table.grant_read_write_data(lambda_function)
         lambda_function.add_to_role_policy(iam.PolicyStatement(
             actions=["dynamodb:*"],
             resources=[table.table_arn]))
-
-        # Invoke Lambda function once
-        
-
-        # Populate dynamoDB
-
-

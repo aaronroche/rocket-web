@@ -24,7 +24,7 @@ aws events put-targets \
 
 aws lambda invoke \
     --function-name ${LAMBDA_FUNCTION_NAME} \
-    --payload '{}' \ 
+    --payload '{}' \
     response.json
 
 echo "Lambda function ${LAMBDA_FUNCTION_NAME} has been triggered immediately and scheduled to run weekly."

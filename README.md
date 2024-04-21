@@ -76,4 +76,6 @@ Now, run these commands to allow your computer to run these bash scripts.
 
 Run the project using `./deploy_and_run.sh` in your terminal.
 
+To close the project run the command `cdk destroy --all`.
+
 That's everything. Enjoy!

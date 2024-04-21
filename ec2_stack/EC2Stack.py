@@ -39,7 +39,7 @@ class EC2Stack(Stack):
             )
         
         # Security group
-        security_group = ec2.SecurityGroup(self, "Ron-ec2-SecurityGroup",
+        security_group = ec2.SecurityGroup(self, "Rocket-Web-EC2-SecurityGroup",
             vpc=vpc,
             description="Allow ssh, http, and https access to ec2 instances",
             allow_all_outbound=False       # Restrict all outbound connections
@@ -58,14 +58,6 @@ class EC2Stack(Stack):
         # Import existing key pair
         key_pair = ec2.KeyPair.from_key_pair_name(self, "KeyPair", "RonKeyPair")
 
-        # Userdata to install dependencies and launch webserver upon ec2 launch
-        user_data = ec2.UserData.for_linux()
-        with open("webscript.sh", 'r') as file:
-            webscript_content = file.read()
-        user_data.add_commands(
-            Fn.sub(webscript_content, access_key_mappings)
-        )
-
         # Create reference to DynamoDB table
         table = dynamodb.Table.from_table_name(self, "MyTable", "rocket-web") 
 
@@ -80,6 +72,14 @@ class EC2Stack(Stack):
             effect=iam.Effect.ALLOW
         )
         role.add_to_policy(read_dynamodb_policy)
+
+        # Userdata to install dependencies and launch webserver upon ec2 launch
+        user_data = ec2.UserData.for_linux()
+        with open("webscript.sh", 'r') as file:
+            webscript_content = file.read()
+        user_data.add_commands(
+            Fn.sub(webscript_content, access_key_mappings)
+        )   
 
         # Instance
         instance = ec2.Instance(self, "Instance",
