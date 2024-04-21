@@ -63,9 +63,17 @@ command.
  * `cdk docs`        open CDK documentation
 
 
-## Required modifications
-This project requires the user to have an `AWS access key ID` and a `secret access key`.
+## Required Modifications to Run Project
+This project requires the user to have an `AWS access key ID`, `secret access key`, and an existing key pair.
 
-To use this project, find the file `.env`. Then, substitute with your `AWS access key ID` and a `secret access key`.
+First, find the file `.env`. Then, substitute with your `AWS access key ID` and a `secret access key`.
+
+Next, find the file `EC2Stack.py` located in the folder `ec2_stack`. Now, find this line of code `key_pair = ec2.KeyPair.from_key_pair_name(self, "KeyPair", "RonKeyPair")`. Change `RonKeyPair` to the name of your existing keypair.
+
+Now, run these commands to allow your computer to run these bash scripts.
+`chmod +x event_bridge.sh`
+`chmod +x deploy_and_run`
+
+Run the project using the command and bash scripts using `./deploy_and_run.sh` in your terminal.
 
 That's everything. Enjoy!
