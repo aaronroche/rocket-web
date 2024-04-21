@@ -62,4 +62,10 @@ command.
  * `cdk diff`        compare deployed stack with current state
  * `cdk docs`        open CDK documentation
 
-Enjoy!
+
+## Required modifications
+This project requires the user to have an `AWS access key ID` and a `secret access key`.
+
+To use this project, find the file `.env`. Then, substitute with your `AWS access key ID` and a `secret access key`.
+
+That's everything. Enjoy!

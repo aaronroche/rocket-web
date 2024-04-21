@@ -2,11 +2,13 @@
 
 import aws_cdk as cdk
 
-from ec2_cdk.ec2_cdk_stack import Ec2CdkStack
+from ec2_stack.EC2Stack import EC2Stack
+from lambda_dynamo_stack.LambdaDynamoStack import LambdaDynamoStack
 
 
 app = cdk.App()
 
-Ec2CdkStack(app, "rons-ec2-cdk")
+LambdaDynamoStack(app, "rc-db")
+EC2Stack(app, "rc-ec2")
 
 app.synth()

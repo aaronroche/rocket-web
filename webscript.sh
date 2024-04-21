@@ -1,4 +1,6 @@
 #!/bin/bash
+REACT_APP_AWS_ACCESS_KEY_ID="${__REACT_APP_AWS_ACCESS_KEY_ID__}"
+REACT_APP_AWS_SECRET_ACCESS_KEY="${__REACT_APP_AWS_SECRET_ACCESS_KEY__}"
 
 # Update and install necessary packages
 sudo yum update -y
@@ -12,9 +14,16 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 nvm install 16.0.0
 
-# Clone the repository and build the project
-git clone https://github.com/tina35917/rocketweb.git
-cd rocketweb
+# Clone the repository
+git clone https://github.com/aaronroche/rocket-web.git --branch website-db      # load specific branch
+
+# Substitute .env variables
+cd /rocket-web/website
+echo "REACT_APP_AWS_ACCESS_KEY_ID=${!REACT_APP_AWS_ACCESS_KEY_ID}" > .env
+echo "REACT_APP_AWS_SECRET_ACCESS_KEY=${!REACT_APP_AWS_SECRET_ACCESS_KEY}" >> .env
+
+# Build project
+cd /rocket-web/website
 npm install
 npm run build
 
